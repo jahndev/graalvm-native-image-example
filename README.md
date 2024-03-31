@@ -96,8 +96,8 @@ SaveTheDogs: Total: $150.0
 ```
 ## Why to implement a CLI without use of popular CLI libs or frameworks like Spring bash or Picocli?
 
-The non-dependency from external libs reduce resources required to keep it that external libs up to date with security 
-updates, and compatibility, to only update the graalvm and jdk if needed.
+To avoid external dependency hence reducing resources required to keep it all up to date plus security 
+updates etc., reducing compile-time, to only update the Graalvm and JDK if needed.
 
 ## Structure tree:
 ```
@@ -195,7 +195,7 @@ successful exit code. The summary should consist of each Donor's total donations
 for a month, each Donor's average donation size, and each Campaign's total
 received donations for a month. There should be separate sections for Donors and
 Campaigns, and the Donors and Campaigns should be printed in alphabetical order.
-The following input
+The following input:
 
 ``` text
 Add Donor Greg $1000
