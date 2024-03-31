@@ -1,15 +1,15 @@
 # gfm-recurring
 
-This is a Java console application named `gfm-recurring`.
+Simple CLI application implemented in Java, compiled with GraalVM, CodeChallenge Style.
 
 ## Prerequisites
 
 Before compiling and running the application, ensure you have the following installed:
 
 - [SDKMAN](https://sdkman.io/)
-- JDK 22 (Oracle GraalVM)
+- [JDK 22 (Oracle GraalVM)](https://www.graalvm.org/downloads/)
 
-## Use java -version to verify your java configuration:
+#### Use java -version to verify your java configuration:
 ```bash
 $ java -version
 java version "22" 2024-03-19
@@ -17,22 +17,22 @@ Java(TM) SE Runtime Environment Oracle GraalVM 22+36.1 (build 22+36-jvmci-b02)
 Java HotSpot(TM) 64-Bit Server VM Oracle GraalVM 22+36.1 (build 22+36-jvmci-b02, mixed mode, sharing)
 ```
 
-## configure JAVA_HOME and 
+#### Configure JAVA_HOME and 
 ```bash
 export JAVA_HOME="/usr/lib/jvm/graalvm-ce-java8-20.0.0"
 ```
 
-## Configuration in ubuntu:
+#### Configuration in ubuntu:
 
-You can use update-alternatives command to select graalvm manually as follow:
+You can use `update-alternatives` command to select graalvm manually as follows:
 ```bash
 $ sudo update-alternatives --config java
 [sudo] password for <user>:
 There are 3 choices for the alternative java (providing /usr/bin/java).
 
-Selection    Path                                            Priority   Status
+Selection      Path                                             Priority   Status
 ------------------------------------------------------------
-0            /usr/lib/jvm/jdk-21-oracle-x64/bin/java          352337920 auto mode
+  0            /usr/lib/jvm/jdk-21-oracle-x64/bin/java          352337920 auto mode
 * 1            /usr/lib/jvm/graalvm-ce-java11-20.0.0/bin/java   2         manual mode
   2            /usr/lib/jvm/java-17-openjdk-amd64/bin/java      1711      manual mode
   3            /usr/lib/jvm/jdk-21-oracle-x64/bin/java          352337920 manual mode
@@ -40,7 +40,7 @@ Selection    Path                                            Priority   Status
 Press <enter> to keep the current choice[*], or type selection number:
 ```
 
-## Step 1: Compile Java Source Files
+### Step 1: Compile Java Source Files
 
 To compile the Java source files, follow these steps:
 
@@ -49,27 +49,27 @@ To compile the Java source files, follow these steps:
 3. Run the following command to compile the Java source files into `.class` files:
 
 ```bash
-   find src/main/java -name "*.java" -print | xargs javac -d out
+$ find src/main/java -name "*.java" -print | xargs javac -d out
 ```
-## Step 2: Generate Native Executable with GraalVM
+### Step 2: Generate Native Executable with GraalVM
 To generate the native executable using GraalVM, follow these steps:
 Make sure you have GraalVM installed and configured.
 Open a terminal.
 Navigate to the root directory of the project.
 Run the following command to generate the native executable:
 ```bash
-   native-image -cp out Main -o gfm-recurring
+$ native-image -cp out Main -o gfm-recurring
 ```
-## Running the Application
+### Step 3: Running the Application
 
-# Executing for interactive mode:
+##### Interactive mode execution:
 ```bash
  ./gfm-recurring
 ```
 
-# Executing for linux command expression:
- ```bash
-:~/projects/gfm-recurring$  cat src/Resources/input.txt | ./gfm-recurring
+##### Executing                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       for linux command expression:
+```bash
+$  cat src/Resources/input.txt | ./gfm-recurring
 gfm-recurring
 Enter command line (press Enter after each line, enter an empty line to exit):
 Donors:
@@ -79,11 +79,11 @@ Janine: Total: $50.0 Average: $50.0
 Campaigns:
 HelpTheKids: Total: $200.0
 SaveTheDogs: Total: $150.0
- ```
+```
 
-The same result will be get executing as follow:
- ```bash
-:~/projects/gfm-recurring$ ./gfm-recurring src/Resources/input.txt 
+The same result will be get executing as follows:
+```bash
+$ ./gfm-recurring src/Resources/input.txt 
 gfm-recurring
 Enter command line (press Enter after each line, enter an empty line to exit):
 Donors:
@@ -93,13 +93,13 @@ Janine: Total: $50.0 Average: $50.0
 Campaigns:
 HelpTheKids: Total: $200.0
 SaveTheDogs: Total: $150.0
- ```
+```
 ## Why to implement a CLI without use of popular CLI libs or frameworks like Spring bash or Picocli?
 
 The non-dependency from external libs reduce resources required to keep it that external libs up to date with security 
 updates, and compatibility, to only update the graalvm and jdk if needed.
 
-## Extructure tree:
+## Structure tree:
 ```
 .
 ├── gfm-recurring
@@ -156,7 +156,7 @@ returning a Command object to be evaluated by the evaluate method in the Command
 
 Is important to bold the use of Maps to store Donors and Campaigns such that can be easily accessed by name
 
-Finally the DonationService class contains the logic needed to store a new Donor, store a new Campaign, add a new
+Finally, the DonationService class contains the logic needed to store a new Donor, store a new Campaign, add a new
 Donation and generate the summary according to the acceptance criteria.
 
 # Initial problem:
@@ -197,7 +197,7 @@ received donations for a month. There should be separate sections for Donors and
 Campaigns, and the Donors and Campaigns should be printed in alphabetical order.
 The following input
 
-``` text`
+``` text
 Add Donor Greg $1000
 Add Donor Janine $100
 Add Campaign SaveTheDogs
@@ -237,8 +237,8 @@ Your submission should include:
        tools to build your solution, but you should not assume they have any tools
        installed beyond a terminal and a shell.
 
-    1. describes how your solution should be tested
-    1. describes the process and rationale behind the solution you have submitted
+    2. describes how your solution should be tested
+    3. describes the process and rationale behind the solution you have submitted
 - After an evaluator follows your instructions, there should be a single
   executable file named `gfm-recurring` in the submission directory. This file
   can be an executable or a shell script. The evaluator will test that your
@@ -246,8 +246,8 @@ Your submission should include:
   to the specified correct output:
 
   ```shell
-  cat input.txt | ./gfm-recurring
-  ./gfm-recurring input.txt
+$ cat input.txt | ./gfm-recurring
+$ ./gfm-recurring input.txt
   ```
 
 Please submit your take-home as a zipped file via the linked provided and do not share it on any public pages.
@@ -264,7 +264,7 @@ We will evaluate your submission in the following areas:
    must be implemented in an object-oriented style.
 3. Best practices
    Does your submission adhere to the practices and idioms of
-   your chosen language? Are variables, functions, etc well named to clarify
+   your chosen language? Are variables, functions, etc. well named to clarify
    intent? Is your submission free of obvious errors, clean of commented-out or
    unreachable code, simple?
 4. Documentation
