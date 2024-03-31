@@ -245,10 +245,10 @@ Your submission should include:
   submissions works by invoking the following commands and comparing the output
   to the specified correct output:
 
-  ```shell
+```shell
 $ cat input.txt | ./gfm-recurring
 $ ./gfm-recurring input.txt
-  ```
+```
 
 Please submit your take-home as a zipped file via the linked provided and do not share it on any public pages.
 
