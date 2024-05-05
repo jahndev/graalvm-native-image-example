@@ -45,7 +45,7 @@ public class DonationService {
         campaigns.keySet().stream()
                 .sorted(String::compareToIgnoreCase)
                 .forEach(campaignName -> {
-                    System.out.printf("%s: Total: $%.2f", campaignName, campaigns.get(campaignName).getTotalDonation());
+                    System.out.printf("%s: Total: $%.2f", campaignName, campaigns.get(campaignName).getTotalDonation()+"");
                 });
     }
 }

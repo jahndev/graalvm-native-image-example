@@ -10,34 +10,41 @@ import static com.gfm.fundraising.command.DFACommandParser.State.END;
 
 public class DFACommandParser {
     public enum State {
-        START, ADD, ADD_DONOR, ADD_CAMPAIGN, DONOR_DONATION_LIMIT, DONATE, END, DONOR, CAMPAIGN
+        START, ADD, ADD_DONOR, ADD_CAMPAIGN, DONATE, END, DONOR, CAMPAIGN;
+
+        public boolean equals(String str) {
+            return name().equalsIgnoreCase(str);
+        }
     }
 
     public static Command parseCommand(String inputLine) {
         State currentState = State.START;
         Command command = null;
 
-        for (String token : " ".split(inputLine)) {
+        for (String token : inputLine.split(" ")) {
             switch (currentState) {
                 case START:
-                    if (ADD.name().equalsIgnoreCase(token)) {
+                    if (ADD.equals(token)) {
                         currentState = ADD;
-                    } else if (DONATE.name().equalsIgnoreCase(token)) {
+                    } else if (DONATE.equals(token)) {
                         currentState = DONATE;
                     }
                     break;
                 case ADD:
-                    if (DONOR.name().equalsIgnoreCase(token)) {
+                    if (DONOR.equals(token)) {
                         currentState = ADD_DONOR;
-                    } else if(CAMPAIGN.name().equalsIgnoreCase(token)) {
+                    } else if(CAMPAIGN.equals(token)) {
                         currentState = ADD_CAMPAIGN;
                     }
                     break;
                 case ADD_DONOR:
-                    if(!token.isEmpty()) {
+                    if(command == null) {
                         command = new CommandAddDonor(token);
-                            ((CommandAddDonor)command).setDonationLimit(Double.valueOf(token.substring(1)));
-                        currentState = END;                    }
+                        currentState = ADD_DONOR;
+                    } else {
+                        ((CommandAddDonor)command).setDonationLimit(Double.valueOf(token.substring(1)));
+                        currentState = END;
+                    }
                     break;
                 case ADD_CAMPAIGN:
                     if (!token.isEmpty()) {
@@ -46,11 +53,12 @@ public class DFACommandParser {
                     currentState = END;
                     break;
                 case DONATE:
-                    command = new CommandAddDonation(
-                            token,
-                            inputLine.split(" ")[2],
-                            Double.parseDouble(inputLine.split(" ")[3].substring(1))
-                    );
+                    //if(inputLine.matches("^[\\p{L} .'-]+$")) {
+                        String[] tokens = inputLine.split(" ");
+                        String campaignName = tokens[2];
+                        double donationAmount = Double.parseDouble(tokens[3].substring(1));
+                        command = new CommandAddDonation(token, campaignName, donationAmount);
+                   // }
                     currentState = END;
                     break;
                 case END:
